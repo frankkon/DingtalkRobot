@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "robot.h"
 
-#include <QMessageBox>
 #include <QtDebug>
 #include <QXmlStreamReader>
 #include <QFile>
