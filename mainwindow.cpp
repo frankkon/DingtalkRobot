@@ -10,6 +10,7 @@
 
 #define MAX_LENGTH 1024
 #define END_OF_FILE -1
+#define CONFIG_FILE "./robots.cfg"
 
 static int lineNum = 0;
 
@@ -70,11 +71,14 @@ void MainWindow::on_comboBox_activated(int index)
 
 void MainWindow::on_pushButton_3_clicked()
 {
+//    qDebug() << QCoreApplication::applicationDirPath();
+//    return;
+
     ui->comboBox->clear();
     qDeleteAll(robots);
     robots.clear();
 
-    QFile f_robots("/Users/kongjun/Documents/MySrc/HelloQT/robots.cfg");
+    QFile f_robots(CONFIG_FILE);
     if(!f_robots.open(QFile::ReadOnly | QFile::Text))
     {
         qDebug() << "打开文件失败，文件名：" << f_robots.fileName();
@@ -91,6 +95,11 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::configRobots(char* robotInfo)
 {
+    if(nullptr == strchr(robotInfo, '|'))
+    {
+        return;
+    }
+
     QString buf(robotInfo);
     QStringList qsBuf = buf.split(QLatin1Char('|'));
     Robot* robot = new Robot();
@@ -133,15 +142,15 @@ void MainWindow::updateRobots(Robot* r)
     ui->comboBox->addItem(r->getName());
     robots.append(r);
 
-    QFile f_robots("/Users/kongjun/Documents/MySrc/HelloQT/robots.cfg");
-    if(!f_robots.open(QFile::WriteOnly |QFile::Append | QFile::Text))
+    QFile f_robots(CONFIG_FILE);
+    if(!f_robots.open(QFile::WriteOnly | QFile::Append | QFile::Text))
     {
         qDebug() << "打开文件失败，文件名：" << f_robots.fileName();
         return;
     }
 
     QTextStream in(&f_robots);
-    in << Qt::endl << r->getName() << "|" << r->getUrl() << "|" << r->getSign() << "|";
+    in << r->getName() << "|" << r->getUrl() << "|" << r->getSign() << "|" << Qt::endl;
 
     f_robots.close();
 }
