@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>345</height>
+    <height>190</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,16 +52,6 @@
     <string>关键字：</string>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>141</y>
-     <width>361</width>
-     <height>151</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
@@ -96,7 +86,7 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>300</y>
+     <y>150</y>
      <width>112</width>
      <height>32</height>
     </rect>
